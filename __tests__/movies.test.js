@@ -47,4 +47,21 @@ describe('hand-of-resources routes', () => {
       },
     ]);
   });
+
+  it('should get a movie by Id', async () => {
+    const movie = await Movie.insert({
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    });
+
+    const res = await request(app).get(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    });
+  });
 });
