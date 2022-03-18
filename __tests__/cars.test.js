@@ -82,8 +82,6 @@ describe('hand-of-resources routes', () => {
 
     const res = await request(app).patch(`/api/v1/cars/${car.id}`).send({
       year: 2020,
-      make: 'Toyota',
-      model: 'Supra',
     });
 
     const expected = {
