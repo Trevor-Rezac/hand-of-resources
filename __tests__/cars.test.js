@@ -38,11 +38,59 @@ describe('hand-of-resources routes', () => {
 
     const res = await request(app).get('/api/v1/cars');
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      year: 1984,
-      make: 'Honda',
-      model: 'Accord',
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        year: 1984,
+        make: 'Honda',
+        model: 'Accord',
+      },
+    ]);
+  });
+
+  it('should get a car by Id', async () => {
+    const car = await Car.create({
+      year: 2017,
+      make: 'Jeep',
+      model: 'Wrangler',
     });
+
+    const res = await request(app).get(`/api/v1/cars/${car.id}`);
+
+    expect(res.body).toEqual(car);
+  });
+
+  it('should delete a car by id', async () => {
+    const car = await Car.create({
+      year: 1990,
+      make: 'Chevy',
+      model: 'Camero',
+    });
+
+    const res = await request(app).delete(`/api/v1/cars/${car.id}`);
+
+    expect(res.body).toEqual(car);
+    expect(await Car.getCarById(car.id)).toBeNull();
+  });
+
+  it('should update a car by Id', async () => {
+    const car = await Car.create({
+      year: 2022,
+      make: 'Toyota',
+      model: 'Supra',
+    });
+
+    const res = await request(app).patch(`/api/v1/cars/${car.id}`).send({
+      year: 2020,
+    });
+
+    const expected = {
+      id: expect.any(String),
+      year: 2020,
+      make: 'Toyota',
+      model: 'Supra',
+    };
+
+    expect(res.body).toEqual(expected);
   });
 });
