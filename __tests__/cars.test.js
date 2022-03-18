@@ -38,11 +38,17 @@ describe('hand-of-resources routes', () => {
 
     const res = await request(app).get('/api/v1/cars');
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      year: 1984,
-      make: 'Honda',
-      model: 'Accord',
-    });
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        year: 1984,
+        make: 'Honda',
+        model: 'Accord',
+      },
+    ]);
   });
+
+  // it('should get a car by Id', async () => {
+  //   const car =
+  // })
 });
