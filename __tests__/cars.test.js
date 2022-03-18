@@ -48,7 +48,20 @@ describe('hand-of-resources routes', () => {
     ]);
   });
 
-  // it('should get a car by Id', async () => {
-  //   const car =
-  // })
+  it('should get a car by Id', async () => {
+    const car = await Car.create({
+      year: 2017,
+      make: 'Jeep',
+      model: 'Wrangler',
+    });
+
+    const res = await request(app).get(`/api/v1/cars/${car.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      year: 2017,
+      make: 'Jeep',
+      model: 'Wrangler',
+    });
+  });
 });
