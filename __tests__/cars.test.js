@@ -70,5 +70,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/cars/${car.id}`);
 
     expect(res.body).toEqual(car);
+    expect(await Car.getCarById(car.id)).toBeNull();
   });
 });
