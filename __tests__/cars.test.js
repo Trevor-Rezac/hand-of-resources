@@ -54,14 +54,11 @@ describe('hand-of-resources routes', () => {
       make: 'Jeep',
       model: 'Wrangler',
     });
+    console.log(car);
 
     const res = await request(app).get(`/api/v1/cars/${car.id}`);
+    console.log(res);
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      year: 2017,
-      make: 'Jeep',
-      model: 'Wrangler',
-    });
+    expect(res.body).toEqual(car);
   });
 });
