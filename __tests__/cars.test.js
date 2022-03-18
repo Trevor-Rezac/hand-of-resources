@@ -59,4 +59,16 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(car);
   });
+
+  it('should delete a car by id', async () => {
+    const car = await Car.create({
+      year: 1990,
+      make: 'Chevy',
+      model: 'Camero',
+    });
+
+    const res = await request(app).delete(`/api/v1/cars/${car.id}`);
+
+    expect(res.body).toEqual(car);
+  });
 });
