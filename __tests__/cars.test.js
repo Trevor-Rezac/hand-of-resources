@@ -72,4 +72,27 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(car);
     expect(await Car.getCarById(car.id)).toBeNull();
   });
+
+  it('should update a car by Id', async () => {
+    const car = await Car.create({
+      year: 2022,
+      make: 'Toyota',
+      model: 'Supra',
+    });
+
+    const res = await request(app).patch(`/api/v1/cars/${car.id}`).send({
+      year: 2020,
+      make: 'Toyota',
+      model: 'Supra',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      year: 2020,
+      make: 'Toyota',
+      model: 'Supra',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
