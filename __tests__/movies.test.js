@@ -36,7 +36,6 @@ describe('hand-of-resources routes', () => {
     });
 
     const res = await request(app).get('/api/v1/movies');
-    console.log(res.body);
 
     expect(res.body).toEqual([
       {
