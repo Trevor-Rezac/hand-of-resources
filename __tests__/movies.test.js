@@ -63,4 +63,27 @@ describe('hand-of-resources routes', () => {
       genre: 'Crime/Drama',
     });
   });
+
+  it('should update a movie by id', async () => {
+    const movie = await Movie.insert({
+      title: 'Poop Fiction',
+      released: 1996,
+      genre: 'Crime/Crama',
+    });
+
+    const res = await request(app).patch(`/api/v1/movies/${movie.id}`).send({
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
