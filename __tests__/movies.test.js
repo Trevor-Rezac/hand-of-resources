@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Movie = require('../lib/models/Movie');
+const req = require('express/lib/request');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -85,5 +86,23 @@ describe('hand-of-resources routes', () => {
     };
 
     expect(res.body).toEqual(expected);
+  });
+
+  it('should delete a movie by Id', async () => {
+    const movie = await Movie.insert({
+      title: 'Poop Fiction',
+      released: 1996,
+      genre: 'Crime/Crama',
+    });
+    console.log(movie.id);
+    const res = await request(app).delete(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'Poop Fiction',
+      released: 1996,
+      genre: 'Crime/Crama',
+    });
+    // expect(await Movie.getMovieById(movie.id)).toBeNull();
   });
 });
