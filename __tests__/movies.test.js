@@ -94,7 +94,6 @@ describe('hand-of-resources routes', () => {
       released: 1996,
       genre: 'Crime/Crama',
     });
-    console.log(movie.id);
     const res = await request(app).delete(`/api/v1/movies/${movie.id}`);
 
     expect(res.body).toEqual({
