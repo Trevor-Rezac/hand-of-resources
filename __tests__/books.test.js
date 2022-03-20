@@ -11,4 +11,19 @@ describe('hand-of-resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('should insert a book into the db', async () => {
+    const res = await request(app).post('/api/v1/books').send({
+      title: 'title',
+      author: 'author',
+      page_count: 500,
+    });
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'title',
+      author: 'author',
+      page_count: 500,
+    });
+  });
 });
