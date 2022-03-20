@@ -46,4 +46,21 @@ describe('hand-of-resources routes', () => {
       },
     ]);
   });
+
+  it('should get a book by the id', async () => {
+    const book = await Book.insert({
+      title: 'some book',
+      author: 'some author',
+      page_count: 100,
+    });
+
+    const res = await request(app).get(`/api/v1/books/${book.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'some book',
+      author: 'some author',
+      page_count: 100,
+    });
+  });
 });
