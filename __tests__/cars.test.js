@@ -13,7 +13,7 @@ describe('hand-of-resources routes', () => {
     pool.end();
   });
 
-  it('should create a new car', async () => {
+  it.skip('should create a new car', async () => {
     const res = await request(app).post('/api/v1/cars').send({
       id: '1',
       year: 1969,
@@ -29,7 +29,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it('should list all cars', async () => {
+  it.skip('should list all cars', async () => {
     await Car.create({
       year: 1984,
       make: 'Honda',
@@ -48,7 +48,7 @@ describe('hand-of-resources routes', () => {
     ]);
   });
 
-  it('should get a car by Id', async () => {
+  it.skip('should get a car by Id', async () => {
     const car = await Car.create({
       year: 2017,
       make: 'Jeep',
@@ -60,7 +60,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(car);
   });
 
-  it('should delete a car by id', async () => {
+  it.skip('should delete a car by id', async () => {
     const car = await Car.create({
       year: 1990,
       make: 'Chevy',
@@ -73,7 +73,7 @@ describe('hand-of-resources routes', () => {
     expect(await Car.getCarById(car.id)).toBeNull();
   });
 
-  it('should update a car by Id', async () => {
+  it.skip('should update a car by Id', async () => {
     const car = await Car.create({
       year: 2022,
       make: 'Toyota',

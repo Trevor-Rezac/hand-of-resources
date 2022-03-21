@@ -11,4 +11,22 @@ describe('hand-of-resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('should insert a show', async () => {
+    const show = {
+      id: '1',
+      title: 'Rick and Morty',
+      seasons: 5,
+      network: 'Adult Swim',
+    };
+
+    const res = await request(app).post('/api/v1/shows').send(show);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'Rick and Morty',
+      seasons: 5,
+      network: 'Adult Swim',
+    });
+  });
 });

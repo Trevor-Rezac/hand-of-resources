@@ -13,7 +13,7 @@ describe('hand-of-resources routes', () => {
     pool.end();
   });
 
-  it('should insert a book into the db', async () => {
+  it.skip('should insert a book into the db', async () => {
     const res = await request(app).post('/api/v1/books').send({
       title: 'title',
       author: 'author',
@@ -28,7 +28,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it('should list all books in the db', async () => {
+  it.skip('should list all books in the db', async () => {
     await Book.insert({
       title: 'book book',
       author: 'author',
@@ -47,7 +47,7 @@ describe('hand-of-resources routes', () => {
     ]);
   });
 
-  it('should get a book by the id', async () => {
+  it.skip('should get a book by the id', async () => {
     const book = await Book.insert({
       title: 'some book',
       author: 'some author',
@@ -64,7 +64,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it('should update a book by the id', async () => {
+  it.skip('should update a book by the id', async () => {
     const book = await Book.insert({
       title: 'wrong title',
       author: 'wrong author',
@@ -88,7 +88,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it('should delete a book by id', async () => {
+  it.skip('should delete a book by id', async () => {
     const data = {
       title: 'Chevy',
       author: 'Camero',
