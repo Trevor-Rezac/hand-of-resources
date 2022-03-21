@@ -1,6 +1,6 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS cars, movies;
+DROP TABLE IF EXISTS cars, movies, books;
 -- DROP TABLE IF EXISTS movies;
 
 CREATE TABLE cars (
@@ -17,4 +17,10 @@ CREATE TABLE movies (
   genre TEXT NOT NULL
 );
 
+CREATE TABLE books (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  page_count INT
+);
 

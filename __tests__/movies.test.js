@@ -36,7 +36,6 @@ describe('hand-of-resources routes', () => {
     });
 
     const res = await request(app).get('/api/v1/movies');
-    console.log(res.body);
 
     expect(res.body).toEqual([
       {
@@ -46,5 +45,51 @@ describe('hand-of-resources routes', () => {
         genre: 'Crime/Drama',
       },
     ]);
+  });
+
+  it('should get a movie by Id', async () => {
+    const movie = await Movie.insert({
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    });
+
+    const res = await request(app).get(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual(movie);
+  });
+
+  it('should update a movie by id', async () => {
+    const movie = await Movie.insert({
+      title: 'Pulp Fiction',
+      released: 1996,
+      genre: 'Crime/Drama',
+    });
+
+    const res = await request(app).patch(`/api/v1/movies/${movie.id}`).send({
+      released: 1994,
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Pulp Fiction',
+      released: 1994,
+      genre: 'Crime/Drama',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('should delete a movie by id', async () => {
+    const movie = await Movie.insert({
+      title: 'Wrong Movie',
+      released: 2009,
+      genre: 'Unknown',
+    });
+
+    const res = await request(app).delete(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual(movie);
+    expect(await Movie.getMovieById(movie.id)).toBeNull();
   });
 });
