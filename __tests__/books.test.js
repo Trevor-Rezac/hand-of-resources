@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Book = require('../lib/models/Book');
-const req = require('express/lib/request');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -90,15 +89,17 @@ describe('hand-of-resources routes', () => {
   });
 
   it('should delete a book by id', async () => {
-    const book = await Book.insert({
-      title: 'wrong book',
-      author: 'delete author',
-      page_count: 1,
-    });
+    const data = {
+      title: 'Chevy',
+      author: 'Camero',
+      page_count: 1990,
+    };
+
+    const book = await Book.insert(data);
 
     const res = await request(app).delete(`/api/v1/books/${book.id}`);
 
     expect(res.body).toEqual(book);
-    // expect(await Book.getBookById(book.id)).toBeNull();
+    expect(await Book.getBookById(book.id)).toBeNull();
   });
 });

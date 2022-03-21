@@ -80,16 +80,16 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  // it('should delete a movie by id', async () => {
-  //   const movie = await Movie.insert({
-  //     title: 'Wrong Movie',
-  //     released: 2009,
-  //     genre: 'Unknown',
-  //   });
+  it('should delete a movie by id', async () => {
+    const movie = await Movie.insert({
+      title: 'Wrong Movie',
+      released: 2009,
+      genre: 'Unknown',
+    });
 
-  //   const res = await request(app).delete(`/api/v1/movies/${movie.id}`);
+    const res = await request(app).delete(`/api/v1/movies/${movie.id}`);
 
-  //   expect(res.body).toEqual(movie);
-  //   expect(await Movie.getMovieById(movie.id)).toBeNull();
-  // });
+    expect(res.body).toEqual(movie);
+    expect(await Movie.getMovieById(movie.id)).toBeNull();
+  });
 });
