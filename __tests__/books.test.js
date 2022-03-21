@@ -63,4 +63,28 @@ describe('hand-of-resources routes', () => {
       page_count: 100,
     });
   });
+
+  it('should update a book by the id', async () => {
+    const book = await Book.insert({
+      title: 'wrong title',
+      author: 'wrong author',
+      page_count: 100,
+    });
+
+    const res = await request(app).patch(`/api/v1/books/${book.id}`).send({
+      id: '1',
+      title: 'correct title',
+      author: 'correct author',
+      page_count: 100,
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'correct title',
+      author: 'correct author',
+      page_count: 100,
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
