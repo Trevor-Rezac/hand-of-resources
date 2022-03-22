@@ -59,12 +59,7 @@ describe('hand-of-resources routes', () => {
 
     const res = await request(app).get(`/api/v1/shows/${show.id}`);
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      title: 'title',
-      seasons: 1,
-      network: 'network',
-    });
+    expect(res.body).toEqual(show);
   });
 
   it('should update a show by the id', async () => {
@@ -99,6 +94,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/shows/${show.id}`);
 
     expect(res.body).toEqual(show);
-    // expect(await Show.getShowById(show.id).toBeNull());
+    expect(await Show.getShowById(show.id)).toBeNull();
   });
 });
