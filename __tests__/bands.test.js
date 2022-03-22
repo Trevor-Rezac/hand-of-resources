@@ -67,4 +67,25 @@ describe('hand-of-resources routes', () => {
       albums: 3,
     });
   });
+
+  it('should update a band by the id', async () => {
+    const band = await Band.insert({
+      name: 'Led Zeppelin',
+      genre: 'Trance',
+      albums: 8,
+    });
+
+    const res = await request(app).patch(`/api/v1/bands/${band.id}`).send({
+      genre: 'Rock',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      name: 'Led Zeppelin',
+      genre: 'Rock',
+      albums: 8,
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
