@@ -67,7 +67,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it('should update a movie by the id', async () => {
+  it('should update a show by the id', async () => {
     const show = await Show.insert({
       title: 'titl',
       seasons: 10,
