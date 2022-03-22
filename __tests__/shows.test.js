@@ -88,4 +88,17 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('should delete a show by the id', async () => {
+    const show = await Show.insert({
+      title: 'wrong title',
+      seasons: 2,
+      network: 'wrong network',
+    });
+
+    const res = await request(app).delete(`/api/v1/shows/${show.id}`);
+
+    expect(res.body).toEqual(show);
+    // expect(await Show.getShowById(show.id).toBeNull());
+  });
 });
