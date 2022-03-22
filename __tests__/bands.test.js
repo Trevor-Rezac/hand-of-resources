@@ -88,4 +88,17 @@ describe('hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('shoud delete a band by the id', async () => {
+    const band = await Band.insert({
+      name: 'Journey',
+      genre: 'Rock',
+      albums: 14,
+    });
+
+    const res = await request(app).delete(`/api/v1/bands/${band.id}`);
+
+    expect(res.body).toEqual(band);
+    // expect(await Band.getBandById(band.id)).toBeNull();
+  });
 });
