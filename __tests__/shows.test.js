@@ -66,4 +66,26 @@ describe('hand-of-resources routes', () => {
       network: 'network',
     });
   });
+
+  it('should update a movie by the id', async () => {
+    const show = await Show.insert({
+      title: 'titl',
+      seasons: 10,
+      network: 'netwok',
+    });
+
+    const res = await request(app).patch(`/api/v1/shows/${show.id}`).send({
+      title: 'title',
+      network: 'network',
+    });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'title',
+      seasons: 10,
+      network: 'network',
+    };
+
+    expect(res.body).toEqual(expected);
+  });
 });
