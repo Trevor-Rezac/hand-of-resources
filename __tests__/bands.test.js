@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Band = require('../lib/models/Band');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -27,5 +28,25 @@ describe('hand-of-resources routes', () => {
       genre: 'Rock',
       albums: 12,
     });
+  });
+
+  it('should list all bands', async () => {
+    await Band.insert({
+      id: '1',
+      name: 'Coheed and Cambria',
+      genre: 'Prog rock',
+      albums: 10,
+    });
+
+    const res = await request(app).get('/api/v1/bands');
+
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        name: 'Coheed and Cambria',
+        genre: 'Prog rock',
+        albums: 10,
+      },
+    ]);
   });
 });
