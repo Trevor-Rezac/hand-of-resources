@@ -13,7 +13,7 @@ describe('hand-of-resources routes', () => {
     pool.end();
   });
 
-  it('should insert a show', async () => {
+  it.skip('should insert a show', async () => {
     const show = {
       id: '1',
       title: 'Rick and Morty',
@@ -31,7 +31,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it('should list all shows', async () => {
+  it.skip('should list all shows', async () => {
     await Show.insert({
       title: 'show title',
       seasons: 4,
@@ -50,7 +50,7 @@ describe('hand-of-resources routes', () => {
     ]);
   });
 
-  it('should get a show by the id', async () => {
+  it.skip('should get a show by the id', async () => {
     const show = await Show.insert({
       title: 'title',
       seasons: 1,
@@ -62,7 +62,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(show);
   });
 
-  it('should update a show by the id', async () => {
+  it.skip('should update a show by the id', async () => {
     const show = await Show.insert({
       title: 'titl',
       seasons: 10,
@@ -84,7 +84,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it('should delete a show by the id', async () => {
+  it.skip('should delete a show by the id', async () => {
     const show = await Show.insert({
       title: 'wrong title',
       seasons: 2,
