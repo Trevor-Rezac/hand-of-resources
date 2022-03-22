@@ -40,11 +40,13 @@ describe('hand-of-resources routes', () => {
 
     const res = await request(app).get('/api/v1/shows');
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      title: 'show title',
-      seasons: 4,
-      network: 'show network',
-    });
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        title: 'show title',
+        seasons: 4,
+        network: 'show network',
+      },
+    ]);
   });
 });
