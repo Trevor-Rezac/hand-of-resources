@@ -99,6 +99,6 @@ describe('hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/bands/${band.id}`);
 
     expect(res.body).toEqual(band);
-    // expect(await Band.getBandById(band.id)).toBeNull();
+    expect(await Band.getBandById(band.id)).toBeNull();
   });
 });
