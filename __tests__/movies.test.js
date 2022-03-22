@@ -13,7 +13,7 @@ describe('hand-of-resources routes', () => {
     pool.end();
   });
 
-  it.skip('should create a new movie', async () => {
+  it('should create a new movie', async () => {
     const res = await request(app).post('/api/v1/movies').send({
       title: 'Pulp Fiction',
       released: 1994,
@@ -28,7 +28,7 @@ describe('hand-of-resources routes', () => {
     });
   });
 
-  it.skip('should list all movies', async () => {
+  it('should list all movies', async () => {
     await Movie.insert({
       title: 'Pulp Fiction',
       released: 1994,
@@ -47,7 +47,7 @@ describe('hand-of-resources routes', () => {
     ]);
   });
 
-  it.skip('should get a movie by Id', async () => {
+  it('should get a movie by Id', async () => {
     const movie = await Movie.insert({
       title: 'Pulp Fiction',
       released: 1994,
@@ -59,7 +59,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(movie);
   });
 
-  it.skip('should update a movie by id', async () => {
+  it('should update a movie by id', async () => {
     const movie = await Movie.insert({
       title: 'Pulp Fiction',
       released: 1996,
@@ -80,7 +80,7 @@ describe('hand-of-resources routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-  it.skip('should delete a movie by id', async () => {
+  it('should delete a movie by id', async () => {
     const movie = await Movie.insert({
       title: 'Wrong Movie',
       released: 2009,

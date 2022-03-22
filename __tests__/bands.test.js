@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Band = require('../lib/models/Band');
-const req = require('express/lib/request');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
