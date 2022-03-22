@@ -49,4 +49,21 @@ describe('hand-of-resources routes', () => {
       },
     ]);
   });
+
+  it('should get a show by the id', async () => {
+    const show = await Show.insert({
+      title: 'title',
+      seasons: 1,
+      network: 'network',
+    });
+
+    const res = await request(app).get(`/api/v1/shows/${show.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: 'title',
+      seasons: 1,
+      network: 'network',
+    });
+  });
 });
