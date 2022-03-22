@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Band = require('../lib/models/Band');
+const req = require('express/lib/request');
 
 describe('hand-of-resources routes', () => {
   beforeEach(() => {
@@ -48,5 +49,22 @@ describe('hand-of-resources routes', () => {
         albums: 10,
       },
     ]);
+  });
+
+  it('should get a band by the id', async () => {
+    const band = await Band.insert({
+      name: 'Nirvana',
+      genre: 'Rock',
+      albums: 3,
+    });
+
+    const res = await request(app).get(`/api/v1/bands/${band.id}`);
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'Nirvana',
+      genre: 'Rock',
+      albums: 3,
+    });
   });
 });
